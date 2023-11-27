@@ -31,7 +31,7 @@ def clean_regex(word):
     # Delete numbers with hyphens in between them (2-3, 45-90, etc)
     cleaned_word = re.sub(r'(\d)-(\d)', '', word)
     # Delete numbers
-    cleaned_word = re.sub(r'[\d/]', '', cleaned_word)
+    cleaned_word = re.sub(r'\b(?:\d+/\d+|\d+)\b', '', cleaned_word)
     # Delete anything with parentheses
     cleaned_word = re.sub(r'\([^)]*\)', '', cleaned_word)
     
@@ -43,8 +43,8 @@ def clean_regex(word):
         # Standalone words such as gr to avoid sangrai become sanai
         standalone_regex = rf'(?<!\S){re.escape(standalone_word)}(?!\S)'
         cleaned_word = re.sub(standalone_regex, '', cleaned_word, flags=re.IGNORECASE)
-
-
+    # Delete space between slashes
+    cleaned_word = re.sub(r'\s*/\s*', '/', cleaned_word)
     cleaned_word = re.sub(r'\s*--\s*', '--', cleaned_word)
     return cleaned_word.strip()
 
