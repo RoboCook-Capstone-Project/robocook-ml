@@ -22,6 +22,20 @@ words_to_delete = ["gram", "kilo", "kg", "liter", "ons", "ml",
                    "sepiring", "piring", "biji", "sesuai selera", "tangkai"]
                     # Manual: ekor
 standalone_words = ['g', "gr"]
+emojis = re.compile("["
+                           "\U0001F600-\U0001F64F"  # Emoticons
+                           "\U0001F300-\U0001F5FF"  # Symbols & pictographs
+                           "\U0001F680-\U0001F6FF"  # Transport & map symbols
+                           "\U0001F700-\U0001F77F"  # Alchemical symbols
+                           "\U0001F780-\U0001F7FF"  # Geometric shapes
+                           "\U0001F800-\U0001F8FF"  # Miscellaneous symbols
+                           "\U0001F900-\U0001F9FF"  # Supplemental symbols and pictographs
+                           "\U0001FA00-\U0001FA6F"  # Extended-A
+                           "\U0001FA70-\U0001FAFF"  # Extended-B
+                           "\U00002702-\U000027B0"  # Dingbats
+                           "\U000024C2-\U0001F251" 
+                           "]+", flags=re.UNICODE)
+
 def clean_regex(word):
     # Delete numbers with hyphens in between them (2-3, 45-90, etc)
     cleaned_word = re.sub(r'(\d)-(\d)', '', word)
@@ -29,9 +43,9 @@ def clean_regex(word):
     cleaned_word = re.sub(r'\b(?:\d+/\d+|\d+)\b', '', cleaned_word)
     # Delete anything with parentheses
     cleaned_word = re.sub(r'\([^)]*\)', '', cleaned_word)
-    # Delete emojis: 
-    cleaned_word = re.sub(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])', '', cleaned_word)
-    # Delete more or less 
+    # Delete emojis
+    cleaned_word = emojis.sub('', cleaned_word)
+    # Delete more or less
     cleaned_word = re.sub(r'\+\-|\-\+', '', cleaned_word)
     # Delete astrix
     cleaned_word = cleaned_word.replace('*', '')
