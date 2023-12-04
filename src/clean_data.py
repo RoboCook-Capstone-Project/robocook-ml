@@ -66,7 +66,10 @@ def update_ingredients(rows, input_file, ingredients_only):
     with open(input_file, 'r', encoding="utf8") as file:
         csvreader = csv.reader(file)
         header = next(csvreader)
-        rows.append(header)
+        if (not ingredients_only):
+            header.append("Main_Ingredient")
+            rows.append(header)
+        
         for row in csvreader: 
             # Delete unnecessary words on ingredients column
             cleaned_ingredients = clean_regex(row[1].lower())
@@ -81,13 +84,16 @@ if __name__ == "__main__":
     dataset = input("Dataset: ")
     ingredients_only = False # Set True for testing (CSV will only contain ingredient column)
     input_file = f'./data/raw/dataset-{dataset}.csv'
-    rows = []
-    rows = update_ingredients(rows, input_file, ingredients_only)
+    rows = update_ingredients([], input_file, ingredients_only)
+    if (not ingredients_only):
+        for row in rows[1:]:
+            row.append(dataset)
+
     output_file = f'./data/cleaned/dataset-{dataset}-cleaned.csv'
     with open(output_file, 'w', newline='', encoding='utf8') as file: 
         csvwriter = csv.writer(file)
         if (ingredients_only):
-            for row in rows: 
+            for row in rows:
                 csvwriter.writerow([row])
         else: 
             csvwriter.writerows(rows)
