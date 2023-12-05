@@ -1,16 +1,5 @@
 import csv 
 import re
-#TODO: 
-# Handle deskripsi tambahan seperti : 
-    # udang windu lepaskan dari cangkangnya dan cuci bersih--tahu  dadu goreng setengah matang
-    # --wortel, cincang halus--telur, kocok lepas
-# Handle perbedaan singkatan seperti: 
-    # daun bawang & daun bw
-    # bw. merah & bawang merah
-# Handle misspelling ? 
-    # mrica, lada bitam, bawah putih, bawah merah, dst 
-# Tambah words_to_delete kalo ada kata yang belum dimasukkin 
-
 # Words & Regex
 words_to_delete = ["gram", "kilo", "kg", "liter", "ons", "ml",
                    "potong", "ptg", "buah", "bh", "butir", "btr", "sachet", "gls",
