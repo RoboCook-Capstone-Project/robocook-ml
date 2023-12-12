@@ -16,6 +16,8 @@ def merge_csv():
         df = pd.read_csv(file_path)
         final_dataset = pd.concat([final_dataset, df], ignore_index=True)
 
+    final_dataset.insert(0, 'id', range(1, 1+len(final_dataset)))
+
     output_path = os.path.join(output_folder, 'final_dataset.csv')
     final_dataset.to_csv(output_path, index=False)
 
