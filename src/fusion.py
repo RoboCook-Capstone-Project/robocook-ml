@@ -11,10 +11,15 @@ vectorizer = CountVectorizer(tokenizer=lambda x: x.split('--'), token_pattern=No
 bahan_matrix = vectorizer.fit_transform(data['Ingredients'])
 
 # Fungsi untuk Dipanggil
+# INPUT: List(strings) bahan1, bahan2
 def fusion_recipes(id_1, id_2, top_n=5):
     # Gabung bahan dari resep input
     resep_input = [id_1, id_2]
+    
+    # UBAH JADI AMBIL INGREDIENTS DARI DATABASE
+    #              BAGIAN YANG INI
     resep_gabung = data.loc[resep_input, 'Ingredients'].str.cat(sep='--')
+    
     resep_gabung_vector = vectorizer.transform([resep_gabung])
 
     # Cari top 5 resep yang paling mirip
