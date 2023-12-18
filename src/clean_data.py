@@ -1,14 +1,15 @@
 import csv 
 import re
 # Words & Regex
-words_to_delete = ["gram", "kilo", "kg", "liter", "ons", "ml",
-                   "potong", "ptg", "buah", "bh", "butir", "btr", "sachet", "gls",
+words_to_delete = ["gram", "kilo", "kg", "liter", "ons", "ml", "ibu jari", "bgks", "st", "potongan",
+                   "potong", "ptg", "buah", "bh", "butir", "btr", "sachet", "gls", "grm",
                    "sedikit", "secukupnya", "sckpnya", "secukup nya", "se cukupnya", "secukup",
                    "sdm", "sdt", "sct", "siung", "batang", "btg", "lembar", "lbr", "lb", "cup",
-                   "segenggam", "genggam", "sejumput", "se jumput", "jumput", "bj",
-                   "sendok makan", "sendok teh", "sendok", "seikat", "ikat", "sck",
-                   "seruas jari", "ruas jari", "seruas", "ruas", "bungkus", "bks", 
-                   "sepiring", "piring", "biji", "sesuai selera", "tangkai"]
+                   "segenggam", "genggam", "sejumput", "se jumput", "jumput", "bj", "helai",
+                   "sendok makan", "sendok teh", "sendok", "seikat", "ikat", "sck", "pcs",
+                   "seruas jari", "ruas jari", "seruas", "ruas", "bungkus", "bks", "cm",
+                   "sepiring", "piring", "biji", "sesuai selera", "tangkai", "gelas",
+                   ]
                     # Manual: ekor
 standalone_words = ['g', "gr"]
 emojis = re.compile("["
