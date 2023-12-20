@@ -1,11 +1,12 @@
 import os 
 import pandas as pd 
+import pickle
 
 
 
 def merge_csv(): 
-    input_folder = './data/cleaned'
-    output_folder = './data/final'
+    input_folder = '../data/cleaned'
+    output_folder = '../data/final'
     os.makedirs(output_folder, exist_ok=True)
     csv_files = [f for f in os.listdir(input_folder) if f.endswith('.csv')]       
 

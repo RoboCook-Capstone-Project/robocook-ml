@@ -1,14 +1,25 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import pickle
+import dill
+from joblib import dump, load
 
 # Masukin Data
-data = pd.read_csv('final_dataset.csv')
+data = pd.read_csv('../data/final/final_dataset.csv')
 data['Ingredients'] = data['Ingredients'].fillna('') 
 
 # Model Jarak Simpel
 vectorizer = CountVectorizer(tokenizer=lambda x: x.split('--'), token_pattern=None)
 bahan_matrix = vectorizer.fit_transform(data['Ingredients'])
+
+# Save
+dump(vectorizer, 'fusion_vectorizer.joblib')
+dump(bahan_matrix, 'fusion_bahan_matrix.joblib')
+
+# Load
+vectorizer = load('fusion_vectorizer.joblib')
+bahan_matrix = load('fusion_bahan_matrix.joblib')
 
 # Fungsi untuk Dipanggil
 # INPUT: (string) bahan1, bahan2

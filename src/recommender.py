@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 
 # Load dataset
-df = pd.read_csv('./data/final/final_dataset.csv')
+df = pd.read_csv('../data/final/final_dataset.csv')
 
 df['Ingredients'] = df['Ingredients'].fillna('')
 
