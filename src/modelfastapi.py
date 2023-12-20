@@ -9,7 +9,7 @@ from sklearn.neighbors import NearestNeighbors
 
 app = FastAPI()
 
-data = pd.read_csv('../data/final/final_dataset.csv')
+data = pd.read_csv('final_dataset.csv')
 
 @app.get('/')
 def index() :
@@ -38,10 +38,8 @@ def fuse(bahan1:str, bahan2:str) :
 #API Endpoint for For You Page Recommendation Model
 #Note : Setiap page akan mengeluarkan 20 resep, jadi ini bakal dijalanin di setiap page
 @app.get('/api/recipe-model/fyp')
-def recommend(recipe_id:int) :
+def recommend(recipe_id:int, start:int, end:int) :
     n = 100
-    start = 1
-    end=20
 
     data['Ingredients'] = data['Ingredients'].fillna('')
 
