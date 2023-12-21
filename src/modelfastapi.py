@@ -6,18 +6,20 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
+from pydantic import BaseModel
 
 app = FastAPI()
 
 data = pd.read_csv('final_dataset.csv')
 
-@app.get('/')
-def index() :
-    return data.head().to_dict(orient='records')
+#Request Body for the Fusion Model POST API
+class FusionIngredients(BaseModel):
+    ingredient1 : str
+    ingredient2 : str
 
 #API Endpoint for Fusion Model
-@app.get('/api/recipe-model/fusion')
-def fuse(bahan1:str, bahan2:str) :
+@app.post('/api/recipe-model/fyp')
+def fuse(ingredients : FusionIngredients) :
     top_n = 5
     data['Ingredients'] = data['Ingredients'].fillna('') 
 
@@ -26,7 +28,7 @@ def fuse(bahan1:str, bahan2:str) :
     bahan_matrix = vectorizer.fit_transform(data['Ingredients'])
     
     # Gabung bahan resep input
-    bahan_gabung = f"{bahan1}--{bahan2}"
+    bahan_gabung = f"{ingredients.ingredient1}--{ingredients.ingredient2}"
     bahan_gabung_vector = vectorizer.transform([bahan_gabung])
 
     # Calculate cosine similarity between the combined vector and all recipes
