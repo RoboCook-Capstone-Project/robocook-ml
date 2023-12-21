@@ -18,7 +18,7 @@ class FusionIngredients(BaseModel):
     ingredient2 : str
 
 #API Endpoint for Fusion Model
-@app.post('/api/recipe-model/fyp')
+@app.post('/api/recipe-model/fusion')
 def fuse(ingredients : FusionIngredients) :
     top_n = 5
     data['Ingredients'] = data['Ingredients'].fillna('') 
